@@ -484,6 +484,16 @@ var mainControls = function(blueprint3d) {
     reader.readAsText(files[0]);
   }
 
+    function saveGltf3d() {
+    var data = blueprint3d.model.exportSerialized();
+    var a = window.document.createElement('a');
+    var blob = new Blob([data], {type : 'text'});
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'design.gltf';
+    document.body.appendChild(a)
+    a.click();
+    document.body.removeChild(a)
+  }
   function saveDesign() {
     var data = blueprint3d.model.exportSerialized();
     var a = window.document.createElement('a');
@@ -498,7 +508,7 @@ var mainControls = function(blueprint3d) {
   function init() {
     $("#new").click(newDesign);
     $("#loadFile").change(loadDesign);
-  //  $("#savegltf").click(saveGltf3d);
+   $("#savegltf").click(saveGltf3d);
     $("#saveFile").click(saveDesign);
   }
 
