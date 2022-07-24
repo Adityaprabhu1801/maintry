@@ -484,8 +484,8 @@ var mainControls = function(blueprint3d) {
     reader.readAsText(files[0]);
   }
 
-  function saveGltf3d() {
-     blueprint3d.roomplanner.addRoomplanListener(EVENT_GLTF_READY, function(evt) {
+ function saveGltf3d() {
+/*     blueprint3d.roomplanner.addRoomplanListener(EVENT_GLTF_READY, function(evt) {
     let data = evt.gltf;
     let a = window.document.createElement('a');
     let blob = new Blob([data], { type: 'text' });
@@ -494,7 +494,9 @@ var mainControls = function(blueprint3d) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-});
+*/
+ console.log('ado');
+ });
   function saveDesign() {
     var data = blueprint3d.model.exportSerialized();
     var a = window.document.createElement('a');
