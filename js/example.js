@@ -2,6 +2,9 @@
 /*
  * Camera Buttons
  */
+      import { BlueprintJS } from 'blueprint.js';
+import { EVENT_LOADED, EVENT_NOTHING_2D_SELECTED, EVENT_CORNER_2D_CLICKED, EVENT_WALL_2D_CLICKED, EVENT_ROOM_2D_CLICKED, EVENT_WALL_CLICKED, EVENT_ROOM_CLICKED, EVENT_NO_ITEM_SELECTED, EVENT_ITEM_SELECTED, EVENT_GLTF_READY } from './scripts/core/events.js';
+
 
 var CameraButtons = function(blueprint3d) {
 
@@ -482,6 +485,17 @@ var mainControls = function(blueprint3d) {
     reader.readAsText(files[0]);
   }
 
+  function saveGltf3d() {
+     blueprint3d.roomplanner.addRoomplanListener(EVENT_GLTF_READY, function(evt) {
+    let data = evt.gltf;
+    let a = window.document.createElement('a');
+    let blob = new Blob([data], { type: 'text' });
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'design.gltf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});
   function saveDesign() {
     var data = blueprint3d.model.exportSerialized();
     var a = window.document.createElement('a');
@@ -496,6 +510,7 @@ var mainControls = function(blueprint3d) {
   function init() {
     $("#new").click(newDesign);
     $("#loadFile").change(loadDesign);
+    $("#savegltf").click(saveGltf3d);
     $("#saveFile").click(saveDesign);
   }
 
